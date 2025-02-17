@@ -45,7 +45,7 @@ List<Reserva> findByUsuario(@Param("usuario") Usuario usuario, Pageable page);
     List<Horario> findHorarioByInstalacionFree(@Param("instalacion") Instalacion instalacion, 
                                                @Param("fecha") LocalDate fecha);
     // Método para comprobar si existe una reserva con un horario y fecha específicos
-@Query("SELECT CASE WHEN COUNT(r) > 0 THEN true ELSE false END FROM Reserva r WHERE r.horario = :horario AND r.fecha = :fecha")
-boolean existsByHorarioAndFecha(@Param("horario") Horario horario, @Param("fecha") LocalDate fecha);
+    @Query("SELECT CASE WHEN COUNT(r) > 0 THEN true ELSE false END FROM Reserva r WHERE r.horario = :horario AND r.fecha = :fecha")
+    boolean existsByHorarioAndFecha(@Param("horario") Horario horario, @Param("fecha") LocalDate fecha);
 
 }

@@ -95,4 +95,24 @@ public class UsuarioController {
         System.out.println("Usuario eliminado correctamente.");
         return ResponseEntity.noContent().build();
     }
+
+@PreAuthorize("hasRole('ADMIN')")
+@PostMapping("/add")
+public ResponseEntity<Usuario> crearUsuario(@RequestBody Usuario usuario) {
+    System.out.println("Recibiendo solicitud para crear usuario: " + usuario);
+    
+    if (usuario.getUsername() == null || usuario.getUsername().isEmpty() ||
+        usuario.getEmail() == null || usuario.getEmail().isEmpty() ||
+        usuario.getPassword() == null || usuario.getPassword().isEmpty()) {
+        
+        return ResponseEntity.badRequest().build(); 
+    }
+
+    Usuario nuevoUsuario = repoUsuario.save(usuario); 
+    System.out.println("Usuario creado con éxito: " + nuevoUsuario);
+    return ResponseEntity.status(201).body(nuevoUsuario); 
+}
+
+    
+
 }

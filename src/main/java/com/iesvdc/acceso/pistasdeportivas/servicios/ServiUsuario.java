@@ -62,6 +62,20 @@ public class ServiUsuario {
         return repoUsuario.save(usuario);
     }
 
+    public Optional<Usuario> actualizarUsuario(Long id, Usuario usuario) {
+        return repoUsuario.findById(id).map(existing -> {
+            existing.setUsername(usuario.getUsername());
+            existing.setEmail(usuario.getEmail());
+            existing.setEnabled(usuario.isEnabled());
+
+            // Permitir actualizar la contraseña sin encriptación
+            if (usuario.getPassword() != null && usuario.getPassword().length() > 4) {
+                existing.setPassword(usuario.getPassword());
+            }
+
+            return repoUsuario.save(existing);
+        });
+    }
     public void eliminarUsuario(Long id) {
         repoUsuario.deleteById(id);
     }

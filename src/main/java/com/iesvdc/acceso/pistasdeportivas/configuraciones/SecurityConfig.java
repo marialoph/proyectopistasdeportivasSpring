@@ -41,7 +41,8 @@ public class SecurityConfig {
                         .requestMatchers("/api/reservar/**", "/api/reservar/*/**",
                             "/api/mis-reservas/**", "/api/mis-reservas/*/**").authenticated()
                         .requestMatchers("/api/auth/**", "/api/auth/*/**").permitAll()
-                        .requestMatchers("/api/admin/**").hasAuthority("ADMIN"))                        
+                        .requestMatchers("/api/admin/**").hasAuthority("ADMIN"))    
+                                            
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider()) 
                 .cors(Customizer.withDefaults())
